@@ -2,6 +2,8 @@
 
 ;; Author: Yuan Fu <casouri@gmail.com>
 
+;;; License: GPLv3 or later
+
 ;;; This file is NOT part of GNU Emacs
 
 ;;; Commentary:
