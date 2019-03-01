@@ -20,6 +20,20 @@ A taste of the =f= operator of vim in Emacs.
 | =find-char-search-range= | find-char doesn’t search the whole buffer, but only a portion around point |
 | =find-char-stop-at=      | where does find-char stop, can be ='beginning= or ='end=                   |
 
+You can customize =find-char-transient-map=, the map that activates during jumping. Default value is:
+#+BEGIN_SRC emacs-lisp
+(defvar find-char-transient-map (let ((map (make-sparse-keymap)))
+                                  (define-key map (kbd "'") #'find-char-forward)
+                                  (define-key map (kbd ";") #'find-char-backward)
+                                  (define-key map (kbd "C-'") #'find-char-forward)
+                                  (define-key map (kbd "C-;") #'find-char-backward)
+                                  (define-key map (kbd "C-d") #'find-char-quick-delete)
+                                  (define-key map (kbd "C-v") #'find-char-toggle-region-highlight)
+                                  (define-key map (kbd "C-w") #'find-char-copy-region)
+                                  map)
+  "Transient map for find-char.")
+#+END_SRC
+
 * Comparison with [[https://github.com/lewang/jump-char][jump-char]]
 
 I’ve been using jump-char for quite a while and it is great. Here is the differences between jump-char and find-char:
