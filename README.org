@@ -2,6 +2,8 @@
 
 A taste of the =f= operator of vim in Emacs.
 
+[[./screenshot.png]]
+
 * Usage
 - Bind =find-char= to some key, say ~C-'~.
 - Hit ~C-'~ and the character that you want to move to.
