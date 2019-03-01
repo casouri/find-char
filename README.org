@@ -3,9 +3,9 @@
 A taste of the =f= operator of vim in Emacs.
 
 * Usage
-- Bind =find-char= to some key, say =C-'=.
-- Hit =C-'= and the character that you want to move to.
-- Press ='= or the character to move forward, =;= to move back.
+- Bind =find-char= to some key, say ~C-'~.
+- Hit ~C-'~ and the character that you want to move to.
+- Press ~'~ or the character to move forward, =;= to move back.
 - Press any other key to finish
 
 * Convenient commands
