@@ -1,6 +1,7 @@
 ;;; find-char.el --- Find char      -*- lexical-binding: t; -*-
 
 ;; Author: Yuan Fu <casouri@gmail.com>
+;; Version: 1.0.0
 
 ;;; License: GPLv3 or later
 

@@ -1,0 +1,27 @@
+#+TITLE: Find-char
+
+A taste of the =f= operator of vim in Emacs.
+
+* Usage
+- Bind =find-char= to some key, say =C-'=.
+- Hit =C-'= and the character that you want to move to.
+- Press ='= or the character to move forward, =;= to move back.
+- Press any other key to finish
+
+* Convenient commands
+| key   | Command                         |
+| =C-d= | Quick delete region (like =df=) |
+| =C-w= | Quick copy region               |
+| =C-v= | Toggle highlight of region      |
+
+* Customization
+
+| Variable                 | Description                                                                |
+| =find-char-search-range= | find-char doesn’t search the whole buffer, but only a portion around point |
+| =find-char-stop-at=      | where does find-char stop, can be ='beginning= or ='end=                   |
+
+* Comparison with [[https://github.com/lewang/jump-char][jump-char]]
+
+I’ve been using jump-char for quite a while and it is great. Here is the differences between jump-char and find-char:
+- jump-char uses isearch, which brings advantages and disadvantages. It is more like searching than a jumping. E.g., there is no trivial way to jump with region activated AFAIK .
+- jump-char integrates ace-jump while find-char doesn’t.
