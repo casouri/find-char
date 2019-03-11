@@ -86,26 +86,19 @@ else normalize to end."
   "Find the index of POS in LIST.
 Might return float when the point is in between two pos.
 E.g., 12.5 for point between 12 and 13."
-  (let ((index 0)
-        (max-possible-index (1- (length list))))
-    (while (and (< index max-possible-index) (> pos (nth index list)))
+  ;;          |0st match   |1nd     |2       |3
+  ;;        ^-0.5th <- start from here
+  ;;          |0  ^0.5     |1       |2       |3
+  ;;               we are at 0.5th if point is greater than 0th match pos
+  ;;          |0           |1  ^1.5 |        |3
+  ;;                           and so on
+  (let ((index -0.5)
+        (max-possible-index (- (length list) 0.5)))
+    (while (and (<= index max-possible-index) (> pos (nth (round (+ index 0.5)) list)))
       (setq index (1+ index)))
-    (cond ((and (= index max-possible-index) (> pos (nth index list)))
-           ;; the loop could have ended when pos still > (nth index list)
-           ;; if we have reached max possible index,
-           ;; which means pos is greater than all matched position
-           ;; in this case return a index that is greater than max possible index
-           (+ index 0.5))
-          ;; pos is smaller than the smallest matched position
-          ;; return a negative index
-          ((and (= index 0) (< pos (nth index list)))
-           (- index 0.5))
-          ;; pos is right on a position
-          ((= pos (nth index list))
-           index)
-          ;; pos is between two position
-          ((< pos (nth index list))
-           (+ index 0.5)))))
+    (if (= pos (nth (round (+ index 0.5)) list))
+        (round (+ index 0.5))
+      index)))
 
 ;;;; Jump
 
