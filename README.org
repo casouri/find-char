@@ -10,11 +10,15 @@ A taste of the =f= operator of vim in Emacs.
 - Press ~'~ or the character to move forward, =;= to move back.
 - Press any other key to finish
 
+*Important:* find-char doesn’t search the whole buffer since it’s just for short distance jumping.
+
 * Convenient commands
 | key   | Command                         |
 | =C-d= | Quick delete region (like =df=) |
 | =C-w= | Quick copy region               |
 | =C-v= | Toggle highlight of region      |
+
+The mark is set to where you began jumping, and you can do whatever you want with that.
 
 * Customization
 
