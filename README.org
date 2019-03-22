@@ -5,9 +5,10 @@ A taste of the =f= operator of vim in Emacs.
 [[./screenshot.png]]
 
 * Usage
-- Bind =find-char= to some key, say ~C-'~.
-- Hit ~C-'~ and the character that you want to move to.
-- Press ~'~ or the character to move forward, =;= to move back.
+- Bind =find-char= to some key, say =M-j=.
+- Hit =M-j= and the character that you want to move to. You can combine numerical arguments with =find-char=, e.g., =C-3 find-char=, =C-- C-4 find-char=.
+- Press “ ’ ” or the character to move forward, =;= to move back.
+- Press the character you are searching for to move forward, Press the capital of it to move backward. E.g, =M-j f=, =f= forward, =F= backward.
 - Press any other key to finish
 
 *Important:* find-char doesn’t search the whole buffer since it’s just for short distance jumping.
