@@ -234,18 +234,22 @@ You can combine countes (ARG) with this function. C-3 M-x ‘find-char’ jumps 
 If ARG is negative (C--), search backward.
 (Don’t use C-u, C-u is passed as 4)."
   (interactive "p")
-  (let ((char-str (char-to-string (read-char "Find: ")))
-        (func-in-dir (if (> arg 0)
-                         #'find-char-forward
-                       #'find-char-backward))
-        (func-in-opposite-dir (if (> arg 0)
-                                  #'find-char-backward
-                                #'find-char-forward)))
+  (let* ((char-str (char-to-string (read-char "Find: ")))
+         (char-upcase-p (equal char-str (upcase char-str)))
+         (func-in-dir (if (> arg 0)
+                          #'find-char-forward
+                        #'find-char-backward))
+         (func-in-opposite-dir (if (> arg 0)
+                                   #'find-char-backward
+                                 #'find-char-forward)))
     (dotimes (_ (abs arg)) (funcall func-in-dir char-str))
     (set-transient-map (let ((tmp-map (make-sparse-keymap)))
                          (set-keymap-parent tmp-map find-char-transient-map)
                          (define-key tmp-map (kbd char-str) func-in-dir)
-                         (define-key tmp-map (kbd (upcase char-str)) func-in-opposite-dir)
+                         (define-key tmp-map (kbd (if char-upcase-p
+                                                      (downcase char-str)
+                                                    (upcase char-str)))
+                           func-in-opposite-dir)
                          tmp-map)
                        t
                        #'find-char-cleanup)))

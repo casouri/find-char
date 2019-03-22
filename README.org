@@ -6,12 +6,18 @@ A taste of the =f= operator of vim in Emacs.
 
 * Usage
 - Bind =find-char= to some key, say =M-j=.
-- Hit =M-j= and the character that you want to move to. You can combine numerical arguments with =find-char=, e.g., =C-3 find-char=, =C-- C-4 find-char=.
-- Press “ ’ ” or the character to move forward, =;= to move back.
-- Press the character you are searching for to move forward, Press the capital of it to move backward. E.g, =M-j f=, =f= forward, =F= backward.
+- Hit =M-j= and the character that you want to move to.
+- Press “ ’ ” to move forward, =;= to move back.
 - Press any other key to finish
 
-*Important:* find-char doesn’t search the whole buffer since it’s just for short distance jumping.
+Extra:
+- You can combine numerical arguments with =find-char=, e.g., =C-3 find-char=, =C-- C-4 find-char=.
+- Press the character you are searching for to move forward, Press the reversed case of it to move backward. E.g,
+  - =M-j f=, =f= forward, =F= backward
+  - =M-j F=, =F= forward, =f= backward.
+- Case-sensitivity is controlled by =case-fold-search=.
+
+*Note:* find-char doesn’t search the whole buffer since it’s just for short distance jumping.
 
 * Convenient commands
 | key   | Command                         |
@@ -19,13 +25,14 @@ A taste of the =f= operator of vim in Emacs.
 | =C-w= | Quick copy region               |
 | =C-v= | Toggle highlight of region      |
 
-The mark is set to where you began jumping, and you can do whatever you want with that.
+The mark is set to where you began jumping, you can do whatever you want with that.
 
 * Customization
 
 | Variable                 | Description                                                                |
 | =find-char-search-range= | find-char doesn’t search the whole buffer, but only a portion around point |
 | =find-char-stop-at=      | where does find-char stop, can be ='beginning= or ='end=                   |
+| =case-fold-search=       | controls case-sensitivity when searching                                   |
 
 You can customize =find-char-transient-map=, the map that activates during jumping. Default value is:
 #+BEGIN_SRC emacs-lisp
@@ -40,6 +47,8 @@ You can customize =find-char-transient-map=, the map that activates during jumpi
                                   map)
   "Transient map for find-char.")
 #+END_SRC
+
+Plus the dynamically binded search char and reverse case of search char mentioned in “usage” section above.
 
 * Comparison with [[https://github.com/lewang/jump-char][jump-char]]
 
