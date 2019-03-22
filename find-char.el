@@ -221,6 +221,9 @@ If STR is nil, use `find-char--last-str'."
                                   (define-key map (kbd "C-d") #'find-char-quick-delete)
                                   (define-key map (kbd "C-v") #'find-char-toggle-region-highlight)
                                   (define-key map (kbd "C-w") #'find-char-copy-region)
+                                  (define-key map [remap keyboard-quit] (lambda () (interactive)
+                                                                          (keyboard-quit)
+                                                                          (find-char-cleanup)))
                                   map)
   "Transient map for find-char.")
 
