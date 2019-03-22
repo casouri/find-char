@@ -230,22 +230,28 @@ If STR is nil, use `find-char--last-str'."
 (defun find-char (arg)
   "Prompt for CHAR and find it and jump to it.
 Any modifier is ignored, i.e., \"C-f\" in considered as \"f\".
-If called with ARG (C-u), find backward."
+You can combine countes (ARG) with this function. C-3 M-x ‘find-char’ jumps to the third match.
+If ARG is negative (C--), search backward.
+(Don’t use C-u, C-u is passed as 4)."
   (interactive "p")
   (let ((char-str (char-to-string (read-char "Find: ")))
-        (func-in-dir (if (eq arg 4)
-                         #'find-char-backward
-                       #'find-char-forward)))
-    (funcall func-in-dir char-str)
+        (func-in-dir (if (> arg 0)
+                         #'find-char-forward
+                       #'find-char-backward))
+        (func-in-opposite-dir (if (> arg 0)
+                                  #'find-char-backward
+                                #'find-char-forward)))
+    (dotimes (_ (abs arg)) (funcall func-in-dir char-str))
     (set-transient-map (let ((tmp-map (make-sparse-keymap)))
                          (set-keymap-parent tmp-map find-char-transient-map)
                          (define-key tmp-map (kbd char-str) func-in-dir)
+                         (define-key tmp-map (kbd (upcase char-str)) func-in-opposite-dir)
                          tmp-map)
                        t
                        #'find-char-cleanup)))
 
 (defun find-char-backward-cmd ()
-  "Equivalent of C-u `find-char'."
+  "Equivalent of C-- M-x `find-char'."
   (interactive)
   (find-char 4))
 
